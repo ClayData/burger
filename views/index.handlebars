@@ -1,0 +1,73 @@
+<h1>Burgers!</h1>
+
+<h2>Burgers not eaten!</h2>
+
+<ul>
+  {{#each burgers}}
+    {{#unless devoured}}
+     <p> {{this.id}}. {{this.burger_name}} <button data-id="{{this.id}}" id="devourburger">Devour It</button>
+    </p>
+    {{/unless}}
+  {{/each}}
+</ul>
+
+<h2>Burgers that are eaten!</h2>
+
+<ul>
+  {{#each burgers}}
+    {{#if devoured}}
+      {{burgers}}
+    {{/if}}
+  {{/each}}
+</ul>
+
+<h2>Add a Burger</h2>
+<form class="button-size" id="createburger">
+
+  <div class="form-group">
+    <label for="bu">Burger Name:</label>
+    <input type="text" id="hamB" name="name">
+  </div>
+  <button type="submit">Add Burger</button>
+</form>
+<script type="text/javascript">
+    
+        $("#createburger").on("submit" function (event) {
+            event.preventDefault();
+
+        let newBurger = {
+            burger_name: $("#hamB").val().trim
+            devoured: false;
+        }    
+        $.ajax("/api/burgers/", {
+            type: "POST",
+            data: newBurger
+        }).then(
+            function () {
+                console.log("created new burger");
+                location.reload();
+            }
+        )
+    })
+
+    $("#devourburger".on("click", function(event){
+        event.preventDefault();
+
+        let id = $("data-id").val().trim();
+
+        let eatenBurger = {
+            devoured: true; 
+        }
+
+        $.ajax("/api/burgers/" + id, {
+            type: "PUT",
+            data: eatenBurger
+        }).then(function () {
+            consoloe.log("updated burger state");
+            location.reload;
+        })
+
+    }))
+    
+
+</script>
