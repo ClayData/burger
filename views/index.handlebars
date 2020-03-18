@@ -5,7 +5,7 @@
 <ul>
   {{#each burgers}}
     {{#unless devoured}}
-     <p> {{this.id}}. {{this.burger_name}} <button data-id="{{this.id}}" id="devourburger">Devour It</button>
+     <p> {{this.id}}. {{this.burger_name}} <button data-burgerid="{{this.id}}" class="devourburger">Devour It</button>
     </p>
     {{/unless}}
   {{/each}}
@@ -16,7 +16,7 @@
 <ul>
   {{#each burgers}}
     {{#if devoured}}
-      {{burgers}}
+       <p> {{this.id}}. {{this.burger_name}}</p>
     {{/if}}
   {{/each}}
 </ul>
@@ -32,13 +32,13 @@
 </form>
 <script type="text/javascript">
     
-        $("#createburger").on("submit" function (event) {
-            event.preventDefault();
-
+        $("#createburger").on("submit", function (event) {
+          event.preventDefault();
+        console.log("click");
         let newBurger = {
-            burger_name: $("#hamB").val().trim
-            devoured: false;
-        }    
+            burger_name: $("#hamB").val().trim(),
+            devoured: 0
+        };    
         $.ajax("/api/burgers/", {
             type: "POST",
             data: newBurger
@@ -50,24 +50,24 @@
         )
     })
 
-    $("#devourburger".on("click", function(event){
+    $(".devourburger").on("click", function(event){
         event.preventDefault();
 
-        let id = $("data-id").val().trim();
-
+        let id = $(this).data("burgerid");
+        console.log(id);
         let eatenBurger = {
-            devoured: true; 
-        }
+            devoured: true
+        };
 
         $.ajax("/api/burgers/" + id, {
             type: "PUT",
             data: eatenBurger
         }).then(function () {
-            consoloe.log("updated burger state");
+            console.log("updated burger state");
             location.reload;
         })
-
-    }))
+    
+    });
     
 
 </script>
