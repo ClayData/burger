@@ -33,7 +33,7 @@
 <script type="text/javascript">
     
         $("#createburger").on("submit", function (event) {
-          event.preventDefault();
+        event.preventDefault();
         console.log("click");
         let newBurger = {
             burger_name: $("#hamB").val().trim(),
@@ -64,7 +64,7 @@
             data: eatenBurger
         }).then(function () {
             console.log("updated burger state");
-            location.reload;
+            location.reload();
         })
     
     });
