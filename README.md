@@ -1,1 +1,2 @@
 # burger
+This application is called Eat-Da-Burger. It takes in burger names via the add burger form on the bottom part of the screent. These burgers are put into a MySQL database and then displayed on the screen with their ID. Each burger put in has not yet been devoured. Users may devour the burger by clicking the devour button next to the name of the burger. Hitting this button changes the devoured column of that burger to true and the burger is then displayed in the devoured burger column.
