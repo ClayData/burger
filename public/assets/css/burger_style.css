@@ -1,0 +1,25 @@
+*,
+*::after,
+*::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+}
+
+html {
+    font-size: 62.5%;
+    /* 1 rem is equal to root font size so 1 rem is 10px */
+}
+
+body {
+    box-sizing: border-box;
+    background-color: wheat;
+    font-size: 2rem;
+    text-align: center;
+}
+
+button {
+    padding: .5rem;
+}
+
+
